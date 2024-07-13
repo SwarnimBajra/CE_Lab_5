@@ -23,11 +23,9 @@ void Graph::addEdge(int vertex1, int vertex2) {
 }
 
 void Graph::removeVertex(int vertexToRemove) {
-    // Remove all edges to this vertex
     for (auto it = adjacencyList.begin(); it != adjacencyList.end(); ++it) {
         it->second.erase(vertexToRemove);
     }
-    // Remove the vertex
     adjacencyList.erase(vertexToRemove);
 }
 
@@ -78,27 +76,24 @@ bool Graph::neighbour(int vertex1, int vertex2) {
 
 void Graph::printGraph() {
     for (auto it = adjacencyList.begin(); it != adjacencyList.end(); ++it) {
-        ::cout << it->first << ": ";
+        cout << it->first << ": ";
         for (const int neighbor : it->second) {
-            ::cout << neighbor << " ";
+            cout << neighbor << " ";
         }
-        ::cout << ::endl;
+        cout << ::endl;
     }
 }
 
 void Graph::generateRandomGraph(int numVertices, int numEdges) {
-    // Reset the graph
     adjacencyList.clear();
-
-    // Initialize vertices
     for (int i = 0; i < numVertices; ++i) {
         addVertex(i);
     }
 
     // Add random edges
-    ::random_device rd;
-    ::mt19937 gen(rd());
-    ::uniform_int_distribution<> vertexDist(0, numVertices - 1);
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> vertexDist(0, numVertices - 1);
 
     for (int i = 0; i < numEdges; ++i) {
         int vertex1 = vertexDist(gen);
